@@ -1,10 +1,12 @@
 package com.taesang.sweethome.domain;
 
 public class SubHomes {
-    private long subHomeId; // Assuming BIGINT translates to long
+    private long subHomeId;
+    private String name;
+    private int type;
     private String address;
     private String owner;
-    private int phoneNo;
-    private String name;
-    private String roomType;
+    private String phoneNo;
+    private double latitude;
+    private double longitude;
 }
