@@ -9,4 +9,6 @@ public class SubHomeDetails {
     private String roomName;
     private int roomNum;
     private int bookedRooms;
+    private int checkInTime;
+    private int checkOutTime;
 }
