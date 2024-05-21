@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -26,9 +27,9 @@ import java.util.Objects;
 
 })
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Users {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false) private String userId;
     @Column(nullable = false) private String userName;
     @Column(nullable = false) private String password;

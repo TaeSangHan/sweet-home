@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import java.util.Optional;
 
-@EnableJpaRepositories
 @Configuration
+@EnableJpaRepositories(basePackages = "com.taesang.sweethome")
 public class JpaConfig {
 
     @Bean
