@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 import java.util.Objects;
@@ -14,7 +15,7 @@ import java.util.Objects;
 @ToString
 @NoArgsConstructor
 @Table(indexes = {
-        @Index(columnList = "subHomeId"),
+        @Index(columnList = "sub_home_id"),
         @Index(columnList = "roomType"),
         @Index(columnList = "roomName"),
         @Index(columnList = "roomCnt"),
@@ -22,12 +23,10 @@ import java.util.Objects;
         @Index(columnList = "checkOutTime")
 })
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class SubHomeDetails {
-    @Id
-    @ManyToOne(optional = false)private SubHomes subHome;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false) private int roomType;
+    @EmbeddedId
+    private SubHomeDetailsKey id;
     @Column(nullable = false) private String roomName;
     @Column(nullable = false) private int roomCnt;
 
@@ -35,17 +34,16 @@ public class SubHomeDetails {
     private int checkInTime;
     private int checkOutTime;
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SubHomeDetails that = (SubHomeDetails) o;
-        return roomType == that.roomType && Objects.equals(subHome, that.subHome);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subHome, roomType);
+        return Objects.hashCode(id);
     }
 }

@@ -5,8 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,20 +27,27 @@ import java.util.Objects;
         @Index(columnList = "longitude"),
         @Index(columnList = "latitude")
 })
+
+@EntityListeners(AuditingEntityListener.class)
 @Entity
 public class SubHomes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false) private long subHomeId;
 
+    /*@OneToMany(mappedBy = "subHome")
+    @ToString.Exclude
+    private final Set<Reviews> SubHomeReviews = new LinkedHashSet<>();*/
+
+
     @Column(nullable = false) private String name;
     @Column(nullable = false) private int type;
     @Column(nullable = false) private String address1;
     @Column(nullable = false) private String address2;
     @Column(nullable = false) private double latitude;
-    @Column(nullable = false)  private double longitude;
+    @Column(nullable = false) private double longitude;
 
-    @Column(nullable = false) private String owner;
+    private String owner;
     private String phoneNo;
 
 

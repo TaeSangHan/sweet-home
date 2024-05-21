@@ -2,6 +2,7 @@ package com.taesang.sweethome.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ import java.util.Objects;
 
 })
 @Entity
-
+@EntityListeners(AuditingEntityListener.class)
 public class SubHomesType {
     @Id
     @Column(nullable = false) private int SubHomesType;
